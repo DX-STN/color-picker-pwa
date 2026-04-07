@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Color Picker PWA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>画像カラーコード抽出</h1>
+
+  <input type="file" id="imageInput" accept="image/*">
+
+  <div id="canvasWrapper">
+    <canvas id="canvas"></canvas>
+  </div>
+
+  <div id="result">
+    <div id="colorPreview"></div>
+    <p>HEX: <span id="hexCode">-</span></p>
+    <p>RGB: <span id="rgbCode">-</span></p>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
