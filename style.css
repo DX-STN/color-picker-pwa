@@ -1,0 +1,24 @@
+body {
+  font-family: system-ui, sans-serif;
+  margin: 1.5rem;
+}
+#canvasWrapper {
+  margin-top: 1rem;
+  border: 1px solid #ccc;
+  max-width: 600px;
+  overflow: auto;
+} #canvas {
+  display: block;
+  max-width: 100%;
+}
+#result {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+#colorPreview {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ccc;
+}
