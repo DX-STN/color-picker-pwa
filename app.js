@@ -22,27 +22,6 @@ imageInput.addEventListener('change', e => {
 });
 
 // キャンバスクリックで色取得
-/*
-canvas.addEventListener('click', e => {
-  if (!canvas.width || !canvas.height) return;
-
-  const rect = canvas.getBoundingClientRect();
-  const x = Math.floor(e.clientX - rect.left);
-  const y = Math.floor(e.clientY - rect.top);
-
-  const pixel = ctx.getImageData(x, y, 1, 1).data;
-  const [r, g, b, a] = pixel;
-
-  const hex = rgbToHex(r, g, b);
-  const rgb = `rgb(${r}, ${g}, ${b})`;
-
-  colorPreview.style.backgroundColor = hex;
-  hexCodeSpan.textContent = hex;
-  rgbCodeSpan.textContent = rgb;
-});
-*/
-
-
 
 canvas.addEventListener('click', e => {
 
@@ -53,32 +32,28 @@ canvas.addEventListener('click', e => {
  // 見かけのサイズに対するクリック位置
 
  const clickX = e.clientX - rect.left;
-
  const clickY = e.clientY - rect.top;
 
  // 実ピクセルサイズへの変換
 
  const scaleX = canvas.width / rect.width;
-
  const scaleY = canvas.height / rect.height;
 
  const x = Math.floor(clickX * scaleX);
-
  const y = Math.floor(clickY * scaleY);
 
  const pixel = ctx.getImageData(x, y, 1, 1).data;
 
  const [r, g, b, a] = pixel;
-
  const hex = rgbToHex(r, g, b);
-
  const rgb = `rgb(${r}, ${g}, ${b})`;
 
  colorPreview.style.backgroundColor = hex;
 
  hexCodeSpan.textContent = hex;
+ rgbCodeSpan.textContent = rgb;
 
- rgbCodeSpan.textContent = rgb; });
+ });
 
 
 
@@ -97,6 +72,6 @@ function rgbToHex(r, g, b) {
 // PWA: Service Worker 登録
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('service-worker.js').catch(console.error);
+ navigator.serviceWorker.register('service-worker.js').catch(console.error);
   });
 }
