@@ -14,6 +14,12 @@ const imageInput = document.getElementById('imageInput');
 
  let currentScale = 1;
 
+
+ // 最後にクリックしたキャンバス座標
+ let lastClickPos = null;
+
+
+
  // 画像読み込み 
 
 imageInput.addEventListener('change', e => { const file = e.target.files[0];
@@ -43,7 +49,7 @@ imageInput.addEventListener('change', e => { const file = e.target.files[0];
  });
 
  // 画像を描き直す
-
+/*
  function redrawImage() {
 
  if (!currentImg) return;
@@ -53,6 +59,52 @@ imageInput.addEventListener('change', e => { const file = e.target.files[0];
  ctx.drawImage( currentImg, 0, 0, currentImg.width * currentScale, currentImg.height * currentScale );
 
  }
+*/
+
+
+
+function redrawImage() {
+
+ if (!currentImg) return;
+
+ ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+ ctx.drawImage( currentImg, 0, 0, currentImg.width * currentScale, currentImg.height * currentScale );
+
+ // 最後にクリックした位置があれば丸を描く
+
+ if (lastClickPos) {
+
+ const { x, y } = lastClickPos;
+
+ const radius = 6;
+
+ // 白い外枠
+
+ ctx.beginPath();
+
+ ctx.arc(x, y, radius, 0, Math.PI * 2);
+
+ ctx.lineWidth = 2;
+
+ ctx.strokeStyle = '#ffffff';
+
+ ctx.stroke();
+
+ // 黒い内側の輪 ctx.beginPath();
+
+ ctx.arc(x, y, radius - 2, 0, Math.PI * 2);
+
+ ctx.strokeStyle = '#000000';
+
+ ctx.stroke();
+
+ }
+
+ }
+
+
+
 
  // キャンバスクリックで色取得 
 
@@ -91,6 +143,11 @@ canvas.addEventListener('click', e => {
  hexCodeSpan.textContent = hex;
 
  rgbCodeSpan.textContent = rgb;
+
+
+ // クリック位置を保存して描き直す lastClickPos = { x, y }; redrawImage();
+
+
 
  });
 
