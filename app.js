@@ -110,6 +110,10 @@ function redrawImage() {
 
 canvas.addEventListener('click', e => {
 
+
+console.log('canvas clicked'); // 追加
+
+
  if (!canvas.width || !canvas.height) return;
 
  const rect = canvas.getBoundingClientRect();
