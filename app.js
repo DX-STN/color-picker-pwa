@@ -5,6 +5,51 @@ const colorPreview = document.getElementById('colorPreview');
 const hexCodeSpan = document.getElementById('hexCode');
 const rgbCodeSpan = document.getElementById('rgbCode');
 
+
+
+
+let currentImg = null; let currentScale = 1; 
+
+imageInput.addEventListener('change', e => {
+ const file = e.target.files[0];
+
+ if (!file) return;
+ const img = new Image();
+ img.onload = () => {
+
+ const maxWidth = 600;
+ cur
+
+rentScale = Math.min(maxWidth / img.width, 1) canvas.width = img.width * currentScale;
+
+ canvas.height = img.height * currentScale;
+
+ currentImg = img;
+
+ redrawImage();
+
+ };
+
+ img.src = URL.createObjectURL(file);
+
+ });
+
+
+
+ function redrawImage() {
+
+ if (!currentImg) return;
+
+ ctx.clearRect(0, 0, canvas.width, canvas.height)
+;
+
+ ctx.drawImage( currentImg, 0, 0, currentImg.width * currentScale, currentImg.height * currentScale );
+
+ }
+
+
+
+
 // 画像読み込み
 imageInput.addEventListener('change', e => {
   const file = e.target.files[0];
