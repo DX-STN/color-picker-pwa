@@ -2,6 +2,7 @@
   "name": "Image Color Picker",
   "short_name": "ColorPick",
   "start_url": "/color-picker-pwa/",
+  "scope": "/color-picker-pwa/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
