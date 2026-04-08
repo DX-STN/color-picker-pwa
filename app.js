@@ -1,4 +1,4 @@
-
+/*
 const imageInput = document.getElementById('imageInput');
 
  const canvas = document.getElementById('canvas');
@@ -170,7 +170,7 @@ const imageInput = document.getElementById('imageInput');
  });
 
  }
-
+*/
 
 
 
@@ -242,6 +242,7 @@ imageInput.addEventListener('change', e => { const file = e.target.files[0];
 
 
 /*
+
 function redrawImage() {
 
  if (!currentImg) return;
@@ -334,7 +335,7 @@ console.log('canvas clicked'); // 追加
 */
 
 
-/*
+
 const rect = canvas.getBoundingClientRect();
 
  const clickX = e.clientX - rect.left;
@@ -410,4 +411,3 @@ const radius = 6;
  });
 
  }
-*/
