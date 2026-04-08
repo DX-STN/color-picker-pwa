@@ -110,7 +110,7 @@ function redrawImage() {
 
 canvas.addEventListener('click', e => {
 
-
+/*
 console.log('canvas clicked'); // 追加
 
 
@@ -150,6 +150,55 @@ console.log('canvas clicked'); // 追加
 
 
  // クリック位置を保存して描き直す lastClickPos = { x, y }; redrawImage();
+*/
+
+
+
+const rect = canvas.getBoundingClientRect();
+
+ const clickX = e.clientX - rect.left;
+
+ const clickY = e.clientY - rect.top;
+
+ const scaleX = canvas.width / rect.width;
+
+ const scaleY = canvas.height / rect.height;
+
+ const x = Math.floor(clickX * scaleX);
+
+ const y = Math.floor(clickY * scaleY);
+
+ console.log('click canvas coords:', x, y);
+
+ // まず画像を描き直す
+
+ redrawImage();
+
+ // その上に○を描く
+
+（lastClickPos は一旦使わない） 
+
+const radius = 6;
+
+ ctx.beginPath();
+
+ ctx.arc(x, y, radius, 0, Math.PI * 2);
+
+ ctx.lineWidth = 2;
+
+ ctx.strokeStyle = '#ffffff';
+
+ ctx.stroke();
+
+ ctx.beginPath();
+
+ ctx.arc(x, y, radius - 2, 0, Math.PI * 2);
+
+ ctx.strokeStyle = '#000000';
+
+ ctx.stroke();
+
+
 
 
 
