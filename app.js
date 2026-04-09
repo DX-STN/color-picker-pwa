@@ -7,7 +7,7 @@ const rgbCodeSpan = document.getElementById('rgbCode');
 let currentImg = null;
 
 // 読み込んだ画像
-let currentScale = 8; // 拡大率（例: 8倍）
+let currentScale = 2; // 拡大率（例: 8倍）
 let lastClickPos = null; // 最後にクリックした位置 {x, y}（画像ピクセル座標）
 // ピクセルをぼかさずに描画する設定
 ctx.imageSmoothingEnabled = false;
