@@ -9,7 +9,7 @@ body {
   /* max-width を消すか、制限しない */
   /* max-width: 600px; は一旦外す */
   /* キャンバス全体が高くなりすぎたとき、縦にもスクロールバーで対応 */
-  max-height: 600px;
+  max-height: 300px;
   overflow: auto; /* スクロールで全体を見られるようにする */
 }
 
