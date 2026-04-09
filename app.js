@@ -4,11 +4,17 @@ const ctx = canvas.getContext('2d');
 const colorPreview = document.getElementById('colorPreview');
 const hexCodeSpan = document.getElementById('hexCode');
 const rgbCodeSpan = document.getElementById('rgbCode');
-let currentImg = null;
 
 // 読み込んだ画像
-let currentScale = 2; // 拡大率（例: 8倍）
-let lastClickPos = null; // 最後にクリックした位置 {x, y}（画像ピクセル座標）
+let currentImg = null;
+let currentScale = 2;// 初期倍率（とりあえず2倍から）
+let lastClickPos = null;// 最後にクリックした位置 {x, y}（画像ピクセル座標）
+
+// ★ ピンチ操作用の状態
+let isPinching = false;
+let pinchStartDistance = 0;
+let pinchStartScale = currentScale;
+
 // ピクセルをぼかさずに描画する設定
 ctx.imageSmoothingEnabled = false;
 // 画像読み込み
