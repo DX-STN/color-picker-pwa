@@ -1,0 +1,30 @@
+body {
+  font-family: system-ui, sans-serif;
+  margin: 1.5rem;
+}
+#canvasWrapper {
+  margin-top: 1rem;
+  border: 1px solid #ccc;
+  max-width: 600px;
+  overflow: auto;
+} #canvas {
+  display: block;
+  max-width: 100%;
+}
+
+
+#canvasWrapper { margin-top: 1rem; border: 1px solid #ccc; /* max-width を消すか、制限しない */ /* max-width: 600px; は一旦外す */ overflow: auto; /* スクロールで全体を見られるようにする */ } #canvas { display: block; /* 内部サイズをそのまま表示に使うため max-width を外す */ /* max-width: 100%; は削除 */ /* ピクセルをくっきり表示したい場合は任意で */ image-rendering: pixelated; }
+
+
+
+#result {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+#colorPreview {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ccc;
+}
