@@ -5,7 +5,7 @@ const colorPreview = document.getElementById('colorPreview');
 const hexCodeSpan = document.getElementById('hexCode');
 const rgbCodeSpan = document.getElementById('rgbCode');
 let currentImg = null;// 読み込んだ画像
-let currentScale = 8; // ★ 拡大率（例: 8倍）。あとでUIから変える前提
+let currentScale = 20; // ★ 拡大率（例: 8倍）。あとでUIから変える前提
 let lastClickPos = null; // 最後にクリックした位置 {x, y}
 
 // ★ ピクセルをぼかさずに描画する設定（重要）
