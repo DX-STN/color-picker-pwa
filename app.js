@@ -32,6 +32,7 @@ imageInput.addEventListener('change', e => {
     canvas.style.width = canvas.width + 'px';
     canvas.style.height = canvas.height + 'px';
     redraw();
+    updateDebugInfo();
   };
   img.src = URL.createObjectURL(file);
 });
@@ -102,6 +103,7 @@ canvas.addEventListener('click', e => {
   // ○の位置を「画像ピクセル座標」で保存して再描画
   lastClickPos = { x: imgX, y: imgY };
   redraw();
+  updateDebugInfo();
 });
 
 function componentToHex(c) {
@@ -158,6 +160,7 @@ canvas.addEventListener('touchmove', e => {
   canvas.style.width = canvas.width + 'px';
   canvas.style.height = canvas.height + 'px';
   redraw();
+  updateDebugInfo();
 }, { passive: false });
 
 // タッチ終了
