@@ -69,7 +69,7 @@ img.onload = () => {
   /*
   let initialScale = Math.min(scaleX, scaleY);
   */
-  / ★ 大きい方を使う → どちらか一方がピッタリ合う
+  //★ 大きい方を使う → どちらか一方がピッタリ合う
   let initialScale = Math.max(scaleX, scaleY);
   // 小さすぎると真っ白に見えがちなので、下限を少し決めておく（お好みで調整）
   const MIN_INITIAL_SCALE = 0.1;
