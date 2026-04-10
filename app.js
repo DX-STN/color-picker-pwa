@@ -1,5 +1,6 @@
 const imageInput = document.getElementById('imageInput');
 const canvas = document.getElementById('canvas');
+const wrapper = document.getElementById('canvasWrapper'); // ★追加
 const ctx = canvas.getContext('2d');
 const colorPreview = document.getElementById('colorPreview');
 const hexCodeSpan = document.getElementById('hexCode');
@@ -182,7 +183,7 @@ function getTouchDistance(touches) {
 }
 
 // タッチ開始
-canvas.addEventListener('touchstart', e => {
+wrapper.addEventListener('touchstart', e => {
   if (!currentImg) return;
   if (e.touches.length === 2) {
     // ブラウザのズームなどを抑制
@@ -193,7 +194,7 @@ canvas.addEventListener('touchstart', e => {
   }
 }, { passive: false });
 // タッチ移動
-canvas.addEventListener('touchmove', e => {
+wrapper.addEventListener('touchmove', e => {
   if (!isPinching) return;
   if (e.touches.length !== 2) return;
   e.preventDefault();
@@ -219,7 +220,7 @@ canvas.addEventListener('touchmove', e => {
 }, { passive: false });
 
 // タッチ終了
-canvas.addEventListener('touchend', e => {
+wrapper.addEventListener('touchend', e => {
   if (e.touches.length < 2) {
     // 2本指でなくなったらピンチ終了
     isPinching = false;
