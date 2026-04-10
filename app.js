@@ -117,7 +117,7 @@ function rgbToHex(r, g, b) {
 // ピンチイン・アウト対応 
 // ======================= 
 // 2本指の距離を返すユーティリティ
-/*
+
 function getTouchDistance(touches) {
   const dx = touches[0].clientX - touches[1].clientX;
   const dy = touches[0].clientY - touches[1].clientY;
@@ -168,9 +168,9 @@ canvas.addEventListener('touchend', e => {
     pinchStartDistance = 0;
   }
 });
-*/
 
 
+/*
 const zoomOutBtn = document.getElementById('zoomOut');
 const zoomInBtn = document.getElementById('zoomIn');
 const zoomValueSpan = document.getElementById('zoomValue');
@@ -217,7 +217,7 @@ zoomOutBtn.addEventListener('click', () => {
 });
 // 初期表示用ラベル
 updateZoomLabel();
-
+*/
 
 
 
