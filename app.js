@@ -23,7 +23,8 @@ imageInput.addEventListener('change', e => {
   if (!file) return;
   const img = new Image();
   img.onload = () => {
-    currentImg = img; lastClickPos = null;
+    currentImg = img;
+    lastClickPos = null;
     // キャンバスの内部サイズを、画像×拡大率にする
     canvas.width = currentImg.width * currentScale;
     canvas.height = currentImg.height * currentScale;
@@ -111,6 +112,9 @@ function componentToHex(c) {
 function rgbToHex(r, g, b) {
   return ( '#' + componentToHex(r) + componentToHex(g) + componentToHex(b) );
 }
+
+// ======================= // ピンチイン・アウト対応 // ======================= // 2本指の距離を返すユーティリティ function getTouchDistance(touches) { const dx = touches[0].clientX - touches[1].clientX; const dy = touches[0].clientY - touches[1].clientY; return Math.hypot(dx, dy); } // タッチ開始 canvas.addEventListener('touchstart', e => { if (!currentImg) return; if (e.touches.length === 2) { // ブラウザのズームなどを抑制 e.preventDefault(); isPinching = true; pinchStartDistance = getTouchDistance(e.touches); pinchStartScale = currentScale; } }, { passive: false }); // タッチ移動 canvas.addEventListener('touchmove', e => { if (!isPinching) return; if (e.touches.length !== 2) return; e.preventDefault(); const currentDistance = getTouchDistance(e.touches); if (pinchStartDistance === 0) return; // 距離の比率から倍率を計算 const scaleFactor = currentDistance / pinchStartDistance; // 新しいスケール let newScale = pinchStartScale * scaleFactor; // 最小・最大倍率を制限（お好みで調整） const MIN_SCALE = 1; const MAX_SCALE = 20; if (newScale < MIN_SCALE) newScale = MIN_SCALE; if (newScale > MAX_SCALE) newScale = MAX_SCALE; currentScale = newScale; // 画像に合わせてキャンバスサイズを更新 canvas.width = currentImg.width * currentScale; canvas.height = currentImg.height * currentScale; canvas.style.width = canvas.width + 'px'; canvas.style.height = canvas.height + 'px'; redraw(); }, { passive: false }); // タッチ終了 canvas.addEventListener('touchend', e => { if (e.touches.length < 2) { // 2本指でなくなったらピンチ終了 isPinching = false; pinchStartDistance = 0; } });
+
 
 // PWA: Service Worker 登録（そのまま残す）
 if ('serviceWorker' in navigator) {
