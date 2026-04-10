@@ -221,6 +221,17 @@ updateZoomLabel();
 
 
 
+const debugInfo = document.getElementById('debugInfo');
+function updateDebugInfo() {
+  if (!currentImg) {
+    debugInfo.textContent = 'no image';
+    return;
+  } const rect = canvas.getBoundingClientRect();
+  debugInfo.textContent = `img: ${currentImg.width}x${currentImg.height} ` + `canvas(internal): ${canvas.width}x${canvas.height} ` + `canvas(css): ${Math.round(rect.width)}x${Math.round(rect.height)} ` + `scale: ${currentScale.toFixed(2)}`;
+}
+
+
+
 // PWA: Service Worker 登録（そのまま残す）
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
