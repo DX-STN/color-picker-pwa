@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>画像カラーコード抽出。</h1>
+  <h1>画像カラーコード抽出</h1>
 
   <input type="file" id="imageInput" accept="image/*">
 
@@ -19,11 +19,18 @@
     <canvas id="canvas"></canvas>
   </div>
 
+  <div id="zoomControls">
+  <button id="zoomOut">-</button>
+  <span id="zoomValue"></span>
+  <button id="zoomIn">+</button>
+  </div>
+
   <div id="result">
     <div id="colorPreview"></div>
     <p>HEX: <span id="hexCode">-</span></p>
     <p>RGB: <span id="rgbCode">-</span></p>
   </div>
+  
 
   <script src="app.js"></script>
 </body>
