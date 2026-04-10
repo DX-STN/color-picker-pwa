@@ -66,7 +66,11 @@ img.onload = () => {
   const scaleX = wrapperWidth / currentImg.width;
   const scaleY = wrapperHeight / currentImg.height;
   // 縦横どちらか小さい方を採用
+  /*
   let initialScale = Math.min(scaleX, scaleY);
+  */
+  / ★ 大きい方を使う → どちらか一方がピッタリ合う
+  let initialScale = Math.max(scaleX, scaleY);
   // 小さすぎると真っ白に見えがちなので、下限を少し決めておく（お好みで調整）
   const MIN_INITIAL_SCALE = 0.1;
   if (initialScale < MIN_INITIAL_SCALE) {
