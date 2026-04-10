@@ -68,7 +68,7 @@ img.onload = () => {
   // 縦横どちらか小さい方を採用
   let initialScale = Math.min(scaleX, scaleY);
   // 小さすぎると真っ白に見えがちなので、下限を少し決めておく（お好みで調整）
-  const MIN_INITIAL_SCALE = 0.5;
+  const MIN_INITIAL_SCALE = 0.1;
   if (initialScale < MIN_INITIAL_SCALE) {
     initialScale = MIN_INITIAL_SCALE;
   }
