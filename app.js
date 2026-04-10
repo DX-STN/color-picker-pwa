@@ -15,6 +15,21 @@ let isPinching = false;
 let pinchStartDistance = 0;
 let pinchStartScale = currentScale;
 
+
+
+const debugInfo = document.getElementById('debugInfo');
+function updateDebugInfo() {
+  if (!currentImg) {
+    debugInfo.textContent = 'no image';
+    return;
+  } const rect = canvas.getBoundingClientRect();
+  debugInfo.textContent = `img: ${currentImg.width}x${currentImg.height} ` + `canvas(internal): ${canvas.width}x${canvas.height} ` + `canvas(css): ${Math.round(rect.width)}x${Math.round(rect.height)} ` + `scale: ${currentScale.toFixed(2)}`;
+}
+
+
+
+
+
 // ピクセルをぼかさずに描画する設定
 ctx.imageSmoothingEnabled = false;
 // 画像読み込み
@@ -224,14 +239,6 @@ updateZoomLabel();
 
 
 
-const debugInfo = document.getElementById('debugInfo');
-function updateDebugInfo() {
-  if (!currentImg) {
-    debugInfo.textContent = 'no image';
-    return;
-  } const rect = canvas.getBoundingClientRect();
-  debugInfo.textContent = `img: ${currentImg.width}x${currentImg.height} ` + `canvas(internal): ${canvas.width}x${canvas.height} ` + `canvas(css): ${Math.round(rect.width)}x${Math.round(rect.height)} ` + `scale: ${currentScale.toFixed(2)}`;
-}
 
 
 
