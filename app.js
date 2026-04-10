@@ -169,6 +169,10 @@ canvas.addEventListener('touchend', e => {
 });
 
 
+
+const zoomOutBtn = document.getElementById('zoomOut'); const zoomInBtn = document.getElementById('zoomIn'); const zoomValueSpan = document.getElementById('zoomValue'); // 表示用に currentScale を丸めて文字表示 function updateZoomLabel() { zoomValueSpan.textContent = `${currentScale.toFixed(1)}x`; } function applyScaleAndRedraw() { if (!currentImg) return; canvas.width = currentImg.width * currentScale; canvas.height = currentImg.height * currentScale; canvas.style.width = canvas.width + 'px'; canvas.style.height = canvas.height + 'px'; redraw(); updateZoomLabel(); } // 画像読み込み時に呼ぶ処理を少し変更 // img.onload の中を次のようにしてみてください img.onload = () => { currentImg = img; lastClickPos = null; // ここで currentScale の初期値を設定 currentScale = 1; // まずは 1x から確かめる applyScaleAndRedraw(); }; // ズームボタンのイベント zoomInBtn.addEventListener('click', () => { currentScale *= 1.5; // 1.5倍ずつ拡大（お好みで） if (currentScale > 20) currentScale = 20; applyScaleAndRedraw(); }); zoomOutBtn.addEventListener('click', () => { currentScale /= 1.5; // 1/1.5ずつ縮小 if (currentScale < 1) currentScale = 1; applyScaleAndRedraw(); }); // 初期表示用ラベル updateZoomLabel();
+
+
 // PWA: Service Worker 登録（そのまま残す）
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
