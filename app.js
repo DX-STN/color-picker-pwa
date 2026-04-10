@@ -68,7 +68,7 @@ img.onload = () => {
   // 縦横どちらか小さい方を採用
   let initialScale = Math.min(scaleX, scaleY);
   // 小さすぎると真っ白に見えがちなので、下限を少し決めておく（お好みで調整）
-  const MIN_INITIAL_SCALE = 0.3;
+  const MIN_INITIAL_SCALE = 0.5;
   if (initialScale < MIN_INITIAL_SCALE) {
     initialScale = MIN_INITIAL_SCALE;
   }
@@ -200,7 +200,7 @@ canvas.addEventListener('touchmove', e => {
   // 新しいスケール
   let newScale = pinchStartScale * scaleFactor;
   // 最小・最大倍率を制限（お好みで調整）
-  const MIN_SCALE = 1;
+  const MIN_SCALE = 0.1;
   const MAX_SCALE = 20;
   if (newScale < MIN_SCALE) newScale = MIN_SCALE;
   if (newScale > MAX_SCALE) newScale = MAX_SCALE;
