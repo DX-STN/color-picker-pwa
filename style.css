@@ -47,3 +47,9 @@ h1 {
   align-items: center;
   gap: 1rem;
 }
+
+#debugInfo {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #555;
+}
