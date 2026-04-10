@@ -54,7 +54,33 @@ imageInput.addEventListener('change', e => {
   */
 
 
-img.onload = () => { currentImg = img; lastClickPos = null; // ラッパー要素のサイズを取得 const wrapper = document.getElementById('canvasWrapper'); const wrapperRect = wrapper.getBoundingClientRect(); const wrapperWidth = wrapperRect.width; const wrapperHeight = wrapperRect.height; // 画像を「全体が収まる」ようにする倍率を計算 const scaleX = wrapperWidth / currentImg.width; const scaleY = wrapperHeight / currentImg.height; // 縦横どちらか小さい方を採用 let initialScale = Math.min(scaleX, scaleY); // 小さすぎると真っ白に見えがちなので、下限を少し決めておく（お好みで調整） const MIN_INITIAL_SCALE = 0.3; if (initialScale < MIN_INITIAL_SCALE) { initialScale = MIN_INITIAL_SCALE; } currentScale = initialScale; // キャンバスサイズを決定 canvas.width = currentImg.width * currentScale; canvas.height = currentImg.height * currentScale; canvas.style.width = canvas.width + 'px'; canvas.style.height = canvas.height + 'px'; redraw(); updateDebugInfo && updateDebugInfo(); // debugInfo を入れている場合だけ呼ばれるように };
+img.onload = () => {
+  currentImg = img;
+  lastClickPos = null;
+  // ラッパー要素のサイズを取得
+  const wrapper = document.getElementById('canvasWrapper');
+  const wrapperRect = wrapper.getBoundingClientRect();
+  const wrapperWidth = wrapperRect.width;
+  const wrapperHeight = wrapperRect.height;
+  // 画像を「全体が収まる」ようにする倍率を計算
+  const scaleX = wrapperWidth / currentImg.width;
+  const scaleY = wrapperHeight / currentImg.height;
+  // 縦横どちらか小さい方を採用
+  let initialScale = Math.min(scaleX, scaleY);
+  // 小さすぎると真っ白に見えがちなので、下限を少し決めておく（お好みで調整）
+  const MIN_INITIAL_SCALE = 0.3;
+  if (initialScale < MIN_INITIAL_SCALE) {
+    initialScale = MIN_INITIAL_SCALE;
+  }
+  currentScale = initialScale;
+  // キャンバスサイズを決定
+  canvas.width = currentImg.width * currentScale;
+  canvas.height = currentImg.height * currentScale;
+  canvas.style.width = canvas.width + 'px';
+  canvas.style.height = canvas.height + 'px';
+  redraw();
+  updateDebugInfo && updateDebugInfo(); // debugInfo を入れている場合だけ呼ばれるように
+};
 
 
 
