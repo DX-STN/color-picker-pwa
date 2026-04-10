@@ -7,7 +7,7 @@ const rgbCodeSpan = document.getElementById('rgbCode');
 
 // 読み込んだ画像
 let currentImg = null;
-let currentScale = 2;// 初期倍率（とりあえず2倍から）
+let currentScale = 1.5;// 初期倍率（とりあえず2倍から）
 let lastClickPos = null;// 最後にクリックした位置 {x, y}（画像ピクセル座標）
 
 // ★ ピンチ操作用の状態
