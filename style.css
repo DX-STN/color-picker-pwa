@@ -40,4 +40,9 @@ h1 {
   border: 1px solid #ccc;
 }
 
-#zoomControls { margin-top: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+#zoomControls {
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
