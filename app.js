@@ -142,6 +142,26 @@ img.onload = () => {
   saveThumbnail();
   // ★ 状態も保存（最低限、最後に開いたファイルとして記録）
   saveState();
+
+  // ★ ここで前回状態を読み込み
+  const prevState = loadState();
+  if ( prevState && prevState.fileName === currentFileName && prevState.imgWidth === currentImg.width && prevState.imgHeight === currentImg.height ) {
+    // 同じファイル名かつ同じサイズの画像が開かれたときだけ、復帰を提案
+    const ok = window.confirm('前回の作業位置へ復帰しますか？');
+    if (ok) {
+      // 保存されているスケールと位置を適用
+      if (typeof prevState.scale === 'number') {
+        currentScale = prevState.scale;
+        // キャンバスサイズをスケールに合わせて更新
+        canvas.width = currentImg.width * currentScale;
+        canvas.height = currentImg.height * currentScale;
+        canvas.style.width = canvas.width + 'px';
+        canvas.style.height = canvas.height + 'px';
+      }
+      lastClickPos = prevState.lastClickPos || null;
+      redraw();
+      updateDebugInfo && updateDebugInfo();
+    } }
 };
   img.src = URL.createObjectURL(file);
 });
