@@ -48,7 +48,7 @@ function updateDebugInfo() {
 }
 
 
-
+// ★ サムネイル用に画像全体を navCanvas に描く function drawThumbnail() { if (!currentImg || !navCanvas || !navCtx) return; const w = navCanvas.width; const h = navCanvas.height; navCtx.clearRect(0, 0, w, h); navCtx.imageSmoothingEnabled = false; const scale = Math.min(w / currentImg.width, h / currentImg.height); const drawW = currentImg.width * scale; const drawH = currentImg.height * scale; const offsetX = (w - drawW) / 2; const offsetY = (h - drawH) / 2; navCtx.drawImage( currentImg, 0, 0, currentImg.width, currentImg.height, offsetX, offsetY, drawW, drawH ); } // ★ サムネイルを localStorage に最新1枚だけ保存 function saveThumbnail() { if (!navCanvas) return; try { const dataUrl = navCanvas.toDataURL('image/png'); localStorage.setItem(THUMB_KEY, dataUrl); } catch (e) { console.error('Failed to save thumbnail', e); } } // ★ 起動時に前回のサムネイルを読み込む function loadThumbnail() { if (!navCanvas || !navCtx) return; const dataUrl = localStorage.getItem(THUMB_KEY); if (!dataUrl) return; const img = new Image(); img.onload = () => { navCtx.clearRect(0, 0, navCanvas.width, navCanvas.height); navCtx.drawImage(img, 0, 0, navCanvas.width, navCanvas.height); }; img.src = dataUrl; }
 
 
 // ピクセルをぼかさずに描画する設定
