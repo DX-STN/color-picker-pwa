@@ -6,15 +6,6 @@ const colorPreview = document.getElementById('colorPreview');
 const hexCodeSpan = document.getElementById('hexCode');
 const rgbCodeSpan = document.getElementById('rgbCode');
 
-
-const imageInput = document.getElementById('imageInput');
-const canvas = document.getElementById('canvas');
-const wrapper = document.getElementById('canvasWrapper');
-const ctx = canvas.getContext('2d');
-const colorPreview = document.getElementById('colorPreview');
-const hexCodeSpan = document.getElementById('hexCode');
-const rgbCodeSpan = document.getElementById('rgbCode');
-
 // ★ サムネイル用キャンバス（HTML に <canvas id="navCanvas"> を用意しておく）
 const navCanvas = document.getElementById('navCanvas');
 const navCtx = navCanvas ? navCanvas.getContext('2d') : null;
