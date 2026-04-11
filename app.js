@@ -39,22 +39,6 @@ imageInput.addEventListener('change', e => {
   if (!file) return;
   const img = new Image();
 
-  /*
-  img.onload = () => {
-    currentImg = img;
-    lastClickPos = null;
-    // キャンバスの内部サイズを、画像×拡大率にする
-    canvas.width = currentImg.width * currentScale;
-    canvas.height = currentImg.height * currentScale;
-    // 念のためCSSでの表示サイズも内部サイズに合わせる（縮小されないように）
-    canvas.style.width = canvas.width + 'px';
-    canvas.style.height = canvas.height + 'px';
-    redraw();
-    updateDebugInfo();
-  };
-  */
-
-
 img.onload = () => {
   currentImg = img;
   lastClickPos = null;
