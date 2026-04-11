@@ -39,6 +39,11 @@ function updateDebugInfo() {
 }
 
 
+
+function saveState() { if (!currentImg || !currentFileName) return; const state = { fileName: currentFileName, scale: currentScale, lastClickPos: lastClickPos, imgWidth: currentImg.width, imgHeight: currentImg.height, savedAt: new Date().toISOString() }; try { localStorage.setItem(STATE_KEY, JSON.stringify(state)); } catch (e) { console.error('Failed to save state', e); } } function loadState() { try { const json = localStorage.getItem(STATE_KEY); if (!json) return null; return JSON.parse(json); } catch (e) { console.error('Failed to load state', e); return null; } }
+
+
+
 // ★ サムネイル用に画像全体をnavCanvas に描く
   function drawThumbnail() {
     if (!currentImg || !navCanvas || !navCtx) return;
