@@ -216,7 +216,7 @@ wrapper.addEventListener('touchmove', e => {
 
 
   // キャンバス自体の最大サイズでも制限する
-  const MAX_CANVAS_SIZE = 18000;//✪✪8000クラッシュ防止
+  const MAX_CANVAS_SIZE = 17000;//✪✪8000クラッシュ防止
   let scaledWidth = currentImg.width * newScale;
   let scaledHeight = currentImg.height * newScale;
   if (scaledWidth > MAX_CANVAS_SIZE || scaledHeight > MAX_CANVAS_SIZE) {
