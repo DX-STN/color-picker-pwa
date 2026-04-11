@@ -210,6 +210,32 @@ wrapper.addEventListener('touchmove', e => {
   if (newScale < MIN_SCALE) newScale = MIN_SCALE;
   if (newScale > MAX_SCALE) newScale = MAX_SCALE;
   currentScale = newScale;
+
+
+
+
+
+// キャンバス自体の最大サイズでも制限する
+  let scaledWidth = currentImg.width * newScale;
+  let scaledHeight = currentImg.height * newScale;
+  if (scaledWidth > MAX_CANVAS_SIZE || scaledHeight > MAX_CANVAS_SIZE) {
+    const ratioW = MAX_CANVAS_SIZE / currentImg.width;
+    const ratioH = MAX_CANVAS_SIZE / currentImg.height;
+    newScale = Math.min(ratioW, ratioH);
+  }
+  currentScale = newScale;
+  canvas.width = currentImg.width * currentScale;
+  canvas.height = currentImg.height * currentScale;
+  canvas.style.width = canvas.width + 'px';
+  canvas.style.height = canvas.height + 'px';
+  redraw();
+  updateDebugInfo();
+
+
+
+
+
+  
   // 画像に合わせてキャンバスサイズを更新
   canvas.width = currentImg.width * currentScale;
   canvas.height = currentImg.height * currentScale;
