@@ -1,4 +1,4 @@
-const imageInput = document.getElementById('imageInput');
+ const imageInput = document.getElementById('imageInput');
 const canvas = document.getElementById('canvas');
 const wrapper = document.getElementById('canvasWrapper'); // ★追加
 const ctx = canvas.getContext('2d');
@@ -216,6 +216,8 @@ wrapper.addEventListener('touchmove', e => {
 
 
 // キャンバス自体の最大サイズでも制限する
+
+  
   let scaledWidth = currentImg.width * newScale;
   let scaledHeight = currentImg.height * newScale;
   if (scaledWidth > MAX_CANVAS_SIZE || scaledHeight > MAX_CANVAS_SIZE) {
@@ -224,18 +226,6 @@ wrapper.addEventListener('touchmove', e => {
     newScale = Math.min(ratioW, ratioH);
   }
   currentScale = newScale;
-  canvas.width = currentImg.width * currentScale;
-  canvas.height = currentImg.height * currentScale;
-  canvas.style.width = canvas.width + 'px';
-  canvas.style.height = canvas.height + 'px';
-  redraw();
-  updateDebugInfo();
-
-
-
-
-
-  
   // 画像に合わせてキャンバスサイズを更新
   canvas.width = currentImg.width * currentScale;
   canvas.height = currentImg.height * currentScale;
