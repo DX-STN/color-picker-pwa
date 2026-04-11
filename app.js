@@ -17,7 +17,7 @@ let pinchStartDistance = 0;
 let pinchStartScale = currentScale;
 
 
-
+//デバッグ用
 const debugInfo = document.getElementById('debugInfo');
 function updateDebugInfo() {
   if (!currentImg) {
@@ -73,7 +73,7 @@ img.onload = () => {
   //★ 大きい方を使う → どちらか一方がピッタリ合う
   let initialScale = Math.max(scaleX, scaleY);
   // 小さすぎると真っ白に見えがちなので、下限を少し決めておく（お好みで調整）
-  const MIN_INITIAL_SCALE = 0.1;
+  const MIN_INITIAL_SCALE = 0.1;//✪0.1
   if (initialScale < MIN_INITIAL_SCALE) {
     initialScale = MIN_INITIAL_SCALE;
   }
@@ -206,7 +206,7 @@ wrapper.addEventListener('touchmove', e => {
   let newScale = pinchStartScale * scaleFactor;
   // 最小・最大倍率を制限（お好みで調整）
   const MIN_SCALE = 0.1;
-  const MAX_SCALE = 20;
+  const MAX_SCALE = 8;//✪8クラッシュ防止
   if (newScale < MIN_SCALE) newScale = MIN_SCALE;
   if (newScale > MAX_SCALE) newScale = MAX_SCALE;
   currentScale = newScale;
