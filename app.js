@@ -6,10 +6,30 @@ const colorPreview = document.getElementById('colorPreview');
 const hexCodeSpan = document.getElementById('hexCode');
 const rgbCodeSpan = document.getElementById('rgbCode');
 
+
+const imageInput = document.getElementById('imageInput');
+const canvas = document.getElementById('canvas');
+const wrapper = document.getElementById('canvasWrapper');
+const ctx = canvas.getContext('2d');
+const colorPreview = document.getElementById('colorPreview');
+const hexCodeSpan = document.getElementById('hexCode');
+const rgbCodeSpan = document.getElementById('rgbCode');
+
+// ★ サムネイル用キャンバス（HTML に <canvas id="navCanvas"> を用意しておく）
+const navCanvas = document.getElementById('navCanvas');
+const navCtx = navCanvas ? navCanvas.getContext('2d') : null;
+
 // 読み込んだ画像
 let currentImg = null;
 let currentScale = 1;// 初期倍率（とりあえず2倍から）
 let lastClickPos = null;// 最後にクリックした位置 {x, y}（画像ピクセル座標）
+
+// ★ どのファイルで作業しているか
+let currentFileName = null;
+
+// ★ 状態保存用キー
+const STATE_KEY = 'colorPickerState_v1';
+const THUMB_KEY = 'thumbnail_v1';
 
 // ★ ピンチ操作用の状態
 let isPinching = false;
