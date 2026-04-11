@@ -238,7 +238,7 @@ wrapper.addEventListener('touchmove', e => {
   let newScale = pinchStartScale * scaleFactor;
   // 最小・最大倍率を制限（お好みで調整）
   const MIN_SCALE = 0.1;
-  const MAX_SCALE = 10;//✪8クラッシュ防止
+  const MAX_SCALE = 20;//✪8クラッシュ防止
   if (newScale < MIN_SCALE) newScale = MIN_SCALE;
   if (newScale > MAX_SCALE) newScale = MAX_SCALE;
   currentScale = newScale;
