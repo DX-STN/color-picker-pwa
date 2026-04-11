@@ -140,6 +140,7 @@ img.onload = () => {
   // ★ ここでサムネイルを描いて保存
   drawThumbnail();
   saveThumbnail();
+  
 };
   img.src = URL.createObjectURL(file);
 });
@@ -211,6 +212,8 @@ canvas.addEventListener('click', e => {
   lastClickPos = { x: imgX, y: imgY };
   redraw();
   updateDebugInfo();
+  // ★ クリック位置が変わったので状態を保存
+  saveState();
 });
 
 function componentToHex(c) {
