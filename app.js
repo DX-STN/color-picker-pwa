@@ -336,7 +336,10 @@ updateZoomLabel();
 
 
 
-
+// ★ 起動時に前回のサムネイルを復元
+window.addEventListener('load', () => {
+  loadThumbnail();
+});
 
 
 // PWA: Service Worker 登録（そのまま残す）
