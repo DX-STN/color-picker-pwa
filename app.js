@@ -92,6 +92,10 @@ ctx.imageSmoothingEnabled = false;
 imageInput.addEventListener('change', e => {
   const file = e.target.files[0];
   if (!file) return;
+
+  // ★ どのファイルか覚えておく（状態保存で使う）
+  currentFileName = file.name;
+  
   const img = new Image();
 
 img.onload = () => {
@@ -105,10 +109,8 @@ img.onload = () => {
   // 画像を「全体が収まる」ようにする倍率を計算
   const scaleX = wrapperWidth / currentImg.width;
   const scaleY = wrapperHeight / currentImg.height;
+  
   // 縦横どちらか小さい方を採用
-  /*
-  let initialScale = Math.min(scaleX, scaleY);
-  */
   //★ 大きい方を使う → どちらか一方がピッタリ合う
   let initialScale = Math.max(scaleX, scaleY);
   // 小さすぎると真っ白に見えがちなので、下限を少し決めておく（お好みで調整）
@@ -124,11 +126,11 @@ img.onload = () => {
   canvas.style.height = canvas.height + 'px';
   redraw();
   updateDebugInfo && updateDebugInfo(); // debugInfo を入れている場合だけ呼ばれるように
-};
-
-
-
   
+  // ★ ここでサムネイルを描いて保存
+  drawThumbnail();
+  saveThumbnail();
+};
   img.src = URL.createObjectURL(file);
 });
 
