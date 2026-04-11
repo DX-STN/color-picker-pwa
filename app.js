@@ -38,9 +38,23 @@ function updateDebugInfo() {
   debugInfo.textContent = `img: ${currentImg.width}x${currentImg.height} ` + `canvas(internal): ${canvas.width}x${canvas.height} ` + `canvas(css): ${Math.round(rect.width)}x${Math.round(rect.height)} ` + `scale: ${currentScale.toFixed(2)}`;
 }
 
+function saveState() {
+  if (!currentImg || !currentFileName) return;
+  const state = { fileName: currentFileName, scale: currentScale, lastClickPos: lastClickPos, imgWidth: currentImg.width, imgHeight: currentImg.height, savedAt: new Date().toISOString() };
+  try { localStorage.setItem(STATE_KEY, JSON.stringify(state));
+      } catch (e) {
+    console.error('Failed to save state', e);
+  } }
 
-
-function saveState() { if (!currentImg || !currentFileName) return; const state = { fileName: currentFileName, scale: currentScale, lastClickPos: lastClickPos, imgWidth: currentImg.width, imgHeight: currentImg.height, savedAt: new Date().toISOString() }; try { localStorage.setItem(STATE_KEY, JSON.stringify(state)); } catch (e) { console.error('Failed to save state', e); } } function loadState() { try { const json = localStorage.getItem(STATE_KEY); if (!json) return null; return JSON.parse(json); } catch (e) { console.error('Failed to load state', e); return null; } }
+function loadState() {
+  try {
+    const json = localStorage.getItem(STATE_KEY);
+    if (!json) return null;
+    return JSON.parse(json);
+  } catch (e) {
+    console.error('Failed to load state', e);
+    return null;
+  } }
 
 
 
