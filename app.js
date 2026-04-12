@@ -297,6 +297,41 @@ function updatePrevMessageArea() {
   prevFileSpan.textContent = state.fileName;
 }
 
+
+function updatePrevBlock() {
+  const state = loadState();
+  const block = document.getElementById('prevBlock');
+  const msgArea = document.getElementById('prevMessageArea');
+  const prevFileSpan = document.getElementById('prevFileName');
+  const prevThumbCanvas = document.getElementById('prevThumbCanvas');
+  const prevThumbCtx = prevThumbCanvas ? prevThumbCanvas.getContext('2d') : null;
+  if (!block || !msgArea || !prevFileSpan || !prevThumbCanvas || !prevThumbCtx) return;
+  // 前回データがなければブロックごと非表示
+  if (!state || !state.fileName) {
+    block.style.display = 'none'; return;
+  }
+  // ブロックを表示
+  block.style.display = 'block';
+  // メッセージ1行（ファイル名だけ差し替え）
+  msgArea.textContent = `前回使用した画像 ${state.fileName}`;
+  // プルダウン内のファイル名
+  prevFileSpan.textContent = state.fileName;
+  // サムネイル画像（THUMB_KEY に保存している dataURL を使う）
+  const dataUrl = localStorage.getItem(THUMB_KEY);
+  if (!dataUrl) {
+    prevThumbCtx.clearRect(0, 0, prevThumbCanvas.width, prevThumbCanvas.height);
+    return;
+  }
+  const img = new Image();
+  img.onload = () => {
+    prevThumbCtx.clearRect(0, 0, prevThumbCanvas.width, prevThumbCanvas.height);
+    prevThumbCtx.drawImage(img, 0, 0, prevThumbCanvas.width, prevThumbCanvas.height);
+  };
+  img.src = dataUrl;
+}
+
+
+
 // ======================= 
 // ピンチイン・アウト対応 
 // ======================= 
