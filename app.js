@@ -106,10 +106,26 @@ function loadThumbnail() {
 // ピクセルをぼかさずに描画する設定
 ctx.imageSmoothingEnabled = false;
 // 画像読み込み
+
+/*
 imageInput.addEventListener('change', e => {
   const file = e.target.files[0];
   if (!file) return;
+*/
 
+
+
+imageInput.addEventListener('change', e => {
+  console.log('change event fired', e.target.files);
+  const file = e.target.files[0];
+  if (!file) {
+    console.warn('no file selected or access denied');
+    return;
+  } console.log('selected file', file.name);
+
+
+
+  
   // どのファイルか覚えておく（状態保存で使う）
   currentFileName = file.name;
   const img = new Image();
