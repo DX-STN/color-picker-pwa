@@ -12,15 +12,41 @@
 </head>
 <body>
 
-  <h1>🔴🔵🟢🟡カラーピッカー🎨</h1>
+<h1>🔴🔵🟢カラーピッカー🎨</h1>
 
+<div id="prevMessageArea"></div>
 
+<input type="file" id="imageInput" accept="image/*">
+<span id="selectedFileName">選択されていません</span>
 
+<canvas id="navCanvas" width="200" height="200"></canvas>
 
+<div id="canvasWrapper">
+  <canvas id="canvas"></canvas>
+</div>
 
+<div id="zoomControls">
+  <button id="zoomOut">-</button>
+  <span id="zoomValue"></span>
+  <button id="zoomIn">+</button>
+</div>
 
+<div id="result">
+  <div id="colorPreview"></div>
+  <p>HEX: <span id="hexCode">-</span></p>
+  <p>RGB: <span id="rgbCode">-</span></p>
+</div>
 
-  
-  <script src="app.js"></script>
+<div id="debugInfo">D</div>
+
+<div id="prevOverlay">
+  <div id="prevOverlayContent">
+    <canvas id="prevThumbCanvas" width="200" height="200"></canvas>
+    <div id="prevFileName"></div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+
 </body>
 </html>
