@@ -53,3 +53,32 @@ h1 {
   font-size: 0.8rem;
   color: #555;
 }
+
+
+
+
+
+#prevMessageArea {
+  min-height: 1.5em;
+  line-height: 1.5em;
+  font-size: 14px;
+  cursor: default;
+}
+
+/* 前回画像のオーバーレイ（最初は非表示） */
+#prevOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+}
+
+#prevOverlayContent {
+  background: #fff;
+  padding: 8px;
+  border-radius: 4px;
+  text-align: center;
+}
