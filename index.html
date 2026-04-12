@@ -11,12 +11,22 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>🔴🔵🟢🟡カラーピッカー🎨</h1>
-    <!-- 前回使用した画像のメッセージ表示エリアを追加 -->
-  <div id="prevMessageArea">前回使用した画像はありません</div>
-  <!-- 前回使用した画像のファイル名だけを表示する領域を追加 -->
-  <div id="prevFileName"></div>
 
+  <h1>🔴🔵🟢カラーピッカー🎨</h1>
+
+    <!-- 前回使用した画像メッセージ＋プルダウン全体 -->
+    <div id="prevBlock" style="margin-bottom:8px; display:none;">
+    <!-- 1行のメッセージエリア（クリックで開閉） -->
+    <div id="prevMessageArea" style="cursor:pointer;"></div>
+    <!-- プルダウン部分（サムネイル＋ファイル名） -->
+    <div id="prevDetail" style="display:none; border:1px solid #ccc; padding:4px; margin-top:4px;">
+      <canvas id="prevThumbCanvas" width="200" height="200" style="border:1px solid #999;"></canvas>
+      <div id="prevFileName" style="margin-top:4px; font-size:12px; color:#555;"></div>
+    </div>
+  </div>
+
+
+  
   <input type="file" id="imageInput" accept="image/*">
   <canvas id="navCanvas" width="200" height="200"></canvas>
   <div id="canvasWrapper">
