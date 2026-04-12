@@ -117,9 +117,9 @@ imageInput.addEventListener('change', e => {
 img.onload = () => {
   currentImg = img;
   lastClickPos = null;
-  cursorPos = null; // ★ 新規追加
+  cursorPos = null; //★①／2 新規追加
   
-  // ★ ここで前回状態を読み込んでおく（まだ saveState は呼ばない）
+  //★②／2 ここで前回状態を読み込んでおく（まだ saveState は呼ばない）
   const prevState = loadState();
   // ラッパー要素のサイズを取得
   const wrapper = document.getElementById('canvasWrapper');
