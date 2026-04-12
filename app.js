@@ -282,6 +282,21 @@ function rgbToHex(r, g, b) {
   return ( '#' + componentToHex(r) + componentToHex(g) + componentToHex(b) );
 }
 
+
+function updatePrevMessageArea() {
+  const state = loadState();
+  const msgArea = document.getElementById('prevMessageArea');
+  const prevFileSpan = document.getElementById('prevFileName');
+  if (!msgArea || !prevFileSpan) return;
+  if (!state || !state.fileName) {
+    msgArea.textContent = '前回使用した画像はありません';
+    prevFileSpan.textContent = '';
+    return;
+  }
+  msgArea.textContent = '前回使用した画像';
+  prevFileSpan.textContent = state.fileName;
+}
+
 // ======================= 
 // ピンチイン・アウト対応 
 // ======================= 
