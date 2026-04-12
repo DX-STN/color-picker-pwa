@@ -221,6 +221,9 @@ canvas.addEventListener('click', e => {
   rgbCodeSpan.textContent = rgb;
   // ○の位置を「画像ピクセル座標」で保存して再描画
   lastClickPos = { x: imgX, y: imgY };
+  // ★ いまの注目位置としても更新しておく  
+  cursorPos = { x: imgX, y: imgY };
+  
   redraw();
   updateDebugInfo();
   // ★ クリック位置が変わったので状態を保存
