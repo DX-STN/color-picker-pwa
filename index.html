@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Color Picker PWA</title>
+  <meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+/>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>🔴🔵🟢カラーピッカー🎨</h1>
+
+    <!-- 前回使用した画像メッセージ＋プルダウン全体 -->
+    <div id="prevBlock" style="margin-bottom:8px; display:none;">
+    <!-- 1行のメッセージエリア（クリックで開閉） -->
+    <div id="prevMessageArea" style="cursor:pointer;"></div>
+    <!-- プルダウン部分（サムネイル＋ファイル名） -->
+    <div id="prevDetail" style="display:none; border:1px solid #ccc; padding:4px; margin-top:4px;">
+      <canvas id="prevThumbCanvas" width="200" height="200" style="border:1px solid #999;"></canvas>
+      <div id="prevFileName" style="margin-top:4px; font-size:12px; color:#555;"></div>
+    </div>
+  </div>
+
+
+  
+  <input type="file" id="imageInput" accept="image/*">
+  <canvas id="navCanvas" width="200" height="200"></canvas>
+  <div id="canvasWrapper">
+    <canvas id="canvas"></canvas>
+  </div>
+
+  <div id="zoomControls">
+  <button id="zoomOut">-</button>
+  <span id="zoomValue"></span>
+  <button id="zoomIn">+</button>
+  </div>
+
+  <div id="result">
+    <div id="colorPreview"></div>
+    <p>HEX: <span id="hexCode">-</span></p>
+    <p>RGB: <span id="rgbCode">-</span></p>
+  </div>
+  
+    <div id="debugInfo">D</div>
+
+  <script src="app.js"></script>
+</body>
+</html>
