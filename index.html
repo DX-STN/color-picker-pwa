@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Color Picker PWA</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+  >
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🔴🔵🟢カラーピッカー🎨</h1>
+
+  <!-- 前回使用した画像のメッセージ行（常に1行分だけ確保） -->
+  <div id="prevMessageArea"></div>
+
+  <input type="file" id="imageInput" accept="image/*">
+  <span id="selectedFileName">選択されていません</span>
+
+  <canvas id="navCanvas" width="200" height="200"></canvas>
+
+  <div id="canvasWrapper">
+    <canvas id="canvas"></canvas>
+  </div>
+
+  <div id="zoomControls">
+    <button id="zoomOut">-</button>
+    <span id="zoomValue"></span>
+    <button id="zoomIn">+</button>
+  </div>
+
+  <div id="result">
+    <div id="colorPreview"></div>
+    <p>HEX: <span id="hexCode">-</span></p>
+    <p>RGB: <span id="rgbCode">-</span></p>
+  </div>
+
+  <div id="debugInfo">D</div>
+
+  <!-- 前回使用した画像のプルダウン（画面前面のオーバーレイ） -->
+  <div id="prevOverlay">
+    <div id="prevOverlayContent">
+      <canvas id="prevThumbCanvas" width="200" height="200"></canvas>
+      <div id="prevFileName"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
