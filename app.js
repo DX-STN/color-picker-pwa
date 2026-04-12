@@ -107,30 +107,21 @@ function loadThumbnail() {
 ctx.imageSmoothingEnabled = false;
 // 画像読み込み
 
-/*
-imageInput.addEventListener('change', e => {
-  const file = e.target.files[0];
-  if (!file) return;
-*/
-
-
-
 imageInput.addEventListener('change', e => {
   console.log('change event fired', e.target.files);
   const file = e.target.files[0];
-  if (!file) {
-    console.warn('no file selected or access denied');
-    return;
-  } console.log('selected file', file.name);
-
-
-
+  if (!file) return;
   
+  // 新しい画像を選択したら前回ブロックを消す
+  const block = document.getElementById('prevBlock');
+  if (block) {
+    block.style.display = 'none';
+  }
+
   // どのファイルか覚えておく（状態保存で使う）
   currentFileName = file.name;
   const img = new Image();
 
-  
 img.onload = () => {
   currentImg = img;
   lastClickPos = null;
