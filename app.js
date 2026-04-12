@@ -111,6 +111,34 @@ imageInput.addEventListener('change', e => {
   console.log('change event fired', e.target.files);
   const file = e.target.files[0];
   if (!file) return;
+
+
+
+
+// ボタン横のラベルに、今選んだファイル名を出す
+  const fileLabel = document.getElementById('selectedFileName');
+  if (fileLabel) {
+    fileLabel.textContent = file.name;
+  }
+  // 新しい画像を選んだら「前回使用した画像」表示は消す
+  hidePrevOverlay();
+  const msgArea = document.getElementById('prevMessageArea');
+  if (msgArea) {
+    msgArea.textContent = '';
+    msgArea.style.cursor = 'default';
+  }
+  currentFileName = file.name;
+  const img = new Image();
+  img.onload = () => {
+    // ここに、あなたの既存のキャンバス描画・navCanvas更新などが入る 
+    // 例: // currentImg = img;
+    // ... // drawThumbnail();
+    // saveThumbnail();
+    const prevState = loadState();
+
+
+
+  
   
   // 新しい画像を選択したら前回ブロックを消す
   const block = document.getElementById('prevBlock');
