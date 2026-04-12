@@ -198,3 +198,27 @@ if (imageInput) {
     if (selectedFileNameLabel) {
       selectedFileNameLabel.textContent = file.name;
     }
+    // 新しい画像を選んだので、前回のオーバーレイとメッセージは消す
+    hidePrevOverlay();
+    if (prevMessageArea) {
+      prevMessageArea.textContent = '';
+      prevMessageArea.style.cursor = 'default';
+    } currentFileName = file.name;
+    const img = new Image();
+    img.onload = () => {
+      currentImg = img;
+      zoomLevel = 1;
+      updateZoomDisplay();
+      // キャンバスサイズを画像やアプリ仕様に合わせて調整
+      mainCanvas.width = img.width;
+      mainCanvas.height = img.height;
+      drawMainImage();
+      drawNavThumbnail();
+      saveThumbnail();
+      saveState();
+      // 同じファイルを選んだときも毎回 change が動くように、value を空に戻す
+      imageInput.value = '';
+    };
+    img.src = URL.createObjectURL(file);
+  });
+}
