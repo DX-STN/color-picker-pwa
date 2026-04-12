@@ -345,6 +345,41 @@ function updatePrevBlock() {
 
 
 
+
+
+
+function showPrevOverlay() {
+  const state = loadState();
+  const overlay = document.getElementById('prevOverlay');
+  const thumbCanvas = document.getElementById('prevThumbCanvas');
+  const fileNameDiv = document.getElementById('prevFileName');
+  if (!overlay || !thumbCanvas || !fileNameDiv) return;
+  if (!state || !state.fileName) return;
+  const ctx = thumbCanvas.getContext('2d');
+  const dataUrl = localStorage.getItem(THUMB_KEY);
+  if (!ctx || !dataUrl) return;
+  const img = new Image();
+  img.onload = () => {
+    ctx.clearRect(0, 0, thumbCanvas.width, thumbCanvas.height);
+    ctx.drawImage(img, 0, 0, thumbCanvas.width, thumbCanvas.height);
+    fileNameDiv.textContent = state.fileName;
+    overlay.style.display = 'flex';
+    // ここで z-index 付きで前面に出す
+  };
+  img.src = dataUrl;
+}
+
+function hidePrevOverlay() {
+  const overlay = document.getElementById('prevOverlay');
+  if (!overlay) return;
+  overlay.style.display = 'none';
+}
+
+
+
+
+
+
 // ======================= 
 // ピンチイン・アウト対応 
 // ======================= 
