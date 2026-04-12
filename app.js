@@ -401,6 +401,8 @@ updateZoomLabel();
 
 // 起動時に前回のサムネイルを復元
 window.addEventListener('load', () => {
+  // 画面を開いたときに、前回使用した画像名だけをメッセージエリアに出す
+  updatePrevMessageArea();
   loadThumbnail();
 });
 
