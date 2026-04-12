@@ -289,6 +289,28 @@ function updatePrevMessageArea() {
 }
 
 
+
+
+
+function updatePrevMessageLine() {
+  const state = loadState();
+  const msgArea = document.getElementById('prevMessageArea');
+  if (!msgArea) return;
+  if (!state || !state.fileName) {
+    // メッセージ枠は残すが、テキストは空
+    msgArea.textContent = '';
+    msgArea.style.cursor = 'default';
+    return;
+  }
+  // 「> 前回使用した画像 ファイル名」を1行で表示
+  msgArea.textContent = `> 前回使用した画像 ${state.fileName}`;
+  msgArea.style.cursor = 'pointer';
+}
+
+
+
+
+
 function updatePrevBlock() {
   const state = loadState();
   const block = document.getElementById('prevBlock');
