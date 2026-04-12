@@ -455,6 +455,19 @@ updateZoomLabel();
 
 // 起動時に前回のサムネイルを復元
 window.addEventListener('load', () => {
+  // 画面を開いたときに、前回使用した画像があれば prevBlock を表示する
+  updatePrevBlock();
+  // メッセージクリックでプルダウン開閉
+  const msgArea = document.getElementById('prevMessageArea');
+  const detail = document.getElementById('prevDetail');
+  
+  if (msgArea && detail) {
+    msgArea.addEventListener('click', () => {
+      const isHidden = detail.style.display === 'none' || !detail.style.display;
+      detail.style.display = isHidden ? 'block' : 'none';
+    });
+  }
+  
   // 画面を開いたときに、前回使用した画像名だけをメッセージエリアに出す
   updatePrevMessageArea();
   loadThumbnail();
