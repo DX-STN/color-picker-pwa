@@ -170,7 +170,7 @@ img.onload = () => {
   // ここで「前回の作業状態」が同じファイルかどうか判定
   const hasPrev = prevState && prevState.fileName === currentFileName && prevState.imgWidth === currentImg.width && prevState.imgHeight === currentImg.height && (prevState.cursorPos || prevState.lastClickPos);
   if (hasPrev) {
-    const ok = window.confirm( '前回の作業位置へ復帰しますか？\\n\\n' + '⚠ 同じ名前・同じサイズの別画像を開いた場合でも、' + 'このダイアログが表示されることがあります。' );
+    const ok = window.confirm( '前回の作業位置へ復帰しますか？\n\n' + '⚠ 同じ名前・同じサイズの別画像を開いた場合でも、' + 'このダイアログが表示されることがあります。' );
     if (ok) {
       // スケール復元
       if (typeof prevState.scale === 'number') {
