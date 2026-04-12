@@ -14,6 +14,7 @@ const navCtx = navCanvas ? navCanvas.getContext('2d') : null;
 let currentImg = null;
 let currentScale = 1;// 初期倍率（とりあえず2倍から）
 let lastClickPos = null;// 最後にクリックした位置 {x, y}（画像ピクセル座標）
+let cursorPos = null; // 最後に「ここを見ていた」位置 {x, y}（現時点ではクリックと同じ）
 
 // ★ どのファイルで作業しているか
 let currentFileName = null;
