@@ -41,7 +41,16 @@ function updateDebugInfo() {
 
 function saveState() {
   if (!currentImg || !currentFileName) return;
-  const state = { fileName: currentFileName, scale: currentScale, lastClickPos: lastClickPos, imgWidth: currentImg.width, imgHeight: currentImg.height, savedAt: new Date().toISOString() };
+  const state = {
+    fileName: currentFileName,
+    scale: currentScale,
+    cursorPos: cursorPos, // 追加 
+    lastClickPos: lastClickPos,
+    imgWidth: currentImg.width,
+    imgHeight: currentImg.height,
+    savedAt: new Date().toISOString()
+  };
+  
   try { localStorage.setItem(STATE_KEY, JSON.stringify(state));
       } catch (e) {
     console.error('Failed to save state', e);
