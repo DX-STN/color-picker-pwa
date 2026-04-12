@@ -6,7 +6,7 @@ const colorPreview = document.getElementById('colorPreview');
 const hexCodeSpan = document.getElementById('hexCode');
 const rgbCodeSpan = document.getElementById('rgbCode');
 
-// ★ サムネイル用キャンバス（HTML に <canvas id="navCanvas"> を用意しておく）
+// サムネイル用キャンバス（HTML に <canvas id="navCanvas"> を用意しておく）
 const navCanvas = document.getElementById('navCanvas');
 const navCtx = navCanvas ? navCanvas.getContext('2d') : null;
 
@@ -16,18 +16,17 @@ let currentScale = 1;// 初期倍率（とりあえず2倍から）
 let lastClickPos = null;// 最後にクリックした位置 {x, y}（画像ピクセル座標）
 let cursorPos = null; // 最後に「ここを見ていた」位置 {x, y}（現時点ではクリックと同じ）
 
-// ★ どのファイルで作業しているか
+// どのファイルで作業しているか
 let currentFileName = null;
 
-// ★ 状態保存用キー
+// 状態保存用キー
 const STATE_KEY = 'colorPickerState_v1';
 const THUMB_KEY = 'thumbnail_v1';
 
-// ★ ピンチ操作用の状態
+// ピンチ操作用の状態
 let isPinching = false;
 let pinchStartDistance = 0;
 let pinchStartScale = currentScale;
-
 
 //デバッグ用
 const debugInfo = document.getElementById('debugInfo');
@@ -44,7 +43,7 @@ function saveState() {
   const state = {
     fileName: currentFileName,
     scale: currentScale,
-    cursorPos: cursorPos, // 追加 
+    cursorPos: cursorPos,//追加
     lastClickPos: lastClickPos,
     imgWidth: currentImg.width,
     imgHeight: currentImg.height,
@@ -66,9 +65,7 @@ function loadState() {
     return null;
   } }
 
-
-
-// ★ サムネイル用に画像全体をnavCanvas に描く
+// サムネイル用に画像全体をnavCanvas に描く
   function drawThumbnail() {
     if (!currentImg || !navCanvas || !navCtx) return;
     const w = navCanvas.width;
@@ -82,7 +79,8 @@ function loadState() {
     const offsetY = (h - drawH) / 2;
     navCtx.drawImage( currentImg, 0, 0, currentImg.width, currentImg.height, offsetX, offsetY, drawW, drawH );
   }
-// ★ サムネイルを localStorage に最新1枚だけ保存
+
+// サムネイルを localStorage に最新1枚だけ保存
 function saveThumbnail() {
   if (!navCanvas) return;
   try {
@@ -92,7 +90,7 @@ function saveThumbnail() {
     console.error('Failed to save thumbnail', e);
   } }
 
-// ★ 起動時に前回のサムネイルを読み込む
+// 起動時に前回のサムネイルを読み込む
 function loadThumbnail() {
   if (!navCanvas || !navCtx) return;
   const dataUrl = localStorage.getItem(THUMB_KEY);
@@ -105,7 +103,6 @@ function loadThumbnail() {
   img.src = dataUrl;
 }
 
-
 // ピクセルをぼかさずに描画する設定
 ctx.imageSmoothingEnabled = false;
 // 画像読み込み
@@ -113,14 +110,17 @@ imageInput.addEventListener('change', e => {
   const file = e.target.files[0];
   if (!file) return;
 
-  // ★ どのファイルか覚えておく（状態保存で使う）
+  // どのファイルか覚えておく（状態保存で使う）
   currentFileName = file.name;
-  
   const img = new Image();
 
 img.onload = () => {
   currentImg = img;
   lastClickPos = null;
+  cursorPos = null; // ★ 新規追加
+  
+  // ★ ここで前回状態を読み込んでおく（まだ saveState は呼ばない）
+  const prevState = loadState();
   // ラッパー要素のサイズを取得
   const wrapper = document.getElementById('canvasWrapper');
   const wrapperRect = wrapper.getBoundingClientRect();
@@ -131,7 +131,7 @@ img.onload = () => {
   const scaleY = wrapperHeight / currentImg.height;
   
   // 縦横どちらか小さい方を採用
-  //★ 大きい方を使う → どちらか一方がピッタリ合う
+  // 大きい方を使う → どちらか一方がピッタリ合う
   let initialScale = Math.max(scaleX, scaleY);
   // 小さすぎると真っ白に見えがちなので、下限を少し決めておく（お好みで調整）
   const MIN_INITIAL_SCALE = 0.1;//✪0.1
@@ -147,11 +147,11 @@ img.onload = () => {
   redraw();
   updateDebugInfo && updateDebugInfo(); // debugInfo を入れている場合だけ呼ばれるように
   
-  // ★ ここでサムネイルを描いて保存
+  // ここでサムネイルを描いて保存
   drawThumbnail();
   saveThumbnail();
 
-  // ★ ここで「前回の作業状態」が同じファイルかどうか判定
+  // ここで「前回の作業状態」が同じファイルかどうか判定
   const hasPrev = prevState && prevState.fileName === currentFileName && prevState.imgWidth === currentImg.width && prevState.imgHeight === currentImg.height && (prevState.cursorPos || prevState.lastClickPos);
   if (hasPrev) {
     const ok = window.confirm( '前回の作業位置へ復帰しますか？\\n\\n' + '⚠ 同じ名前・同じサイズの別画像を開いた場合でも、' + 'このダイアログが表示されることがあります。' );
@@ -170,7 +170,7 @@ img.onload = () => {
       redraw();
       updateDebugInfo && updateDebugInfo();
     } }
-  // ★ 最後に現在の状態を保存（今回の画像で上書き）
+  // 最後に現在の状態を保存（今回の画像で上書き）
   saveState();
 };
   img.src = URL.createObjectURL(file);
@@ -241,12 +241,12 @@ canvas.addEventListener('click', e => {
   rgbCodeSpan.textContent = rgb;
   // ○の位置を「画像ピクセル座標」で保存して再描画
   lastClickPos = { x: imgX, y: imgY };
-  // ★ いまの注目位置としても更新しておく  
+  // いまの注目位置としても更新しておく  
   cursorPos = { x: imgX, y: imgY };
   
   redraw();
   updateDebugInfo();
-  // ★ クリック位置が変わったので状態を保存
+  // クリック位置が変わったので状態を保存
   saveState();
 });
 
@@ -281,6 +281,7 @@ wrapper.addEventListener('touchstart', e => {
     pinchStartScale = currentScale;
   }
 }, { passive: false });
+
 // タッチ移動
 wrapper.addEventListener('touchmove', e => {
   if (!isPinching) return;
@@ -379,7 +380,7 @@ updateZoomLabel();
 
 
 
-// ★ 起動時に前回のサムネイルを復元
+// 起動時に前回のサムネイルを復元
 window.addEventListener('load', () => {
   loadThumbnail();
 });
