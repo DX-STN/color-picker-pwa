@@ -188,6 +188,9 @@ img.onload = () => {
     } }
   // 最後に現在の状態を保存（今回の画像で上書き）
   saveState();
+  // ★ここで毎回リセット
+  imageInput.value = '';
+  
 };
   img.src = URL.createObjectURL(file);
 });
