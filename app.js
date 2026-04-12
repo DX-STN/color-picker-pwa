@@ -150,7 +150,27 @@ img.onload = () => {
   // ★ ここでサムネイルを描いて保存
   drawThumbnail();
   saveThumbnail();
-  // ★ 状態も保存（最低限、最後に開いたファイルとして記録）
+
+  // ★ ここで「前回の作業状態」が同じファイルかどうか判定
+  const hasPrev = prevState && prevState.fileName === currentFileName && prevState.imgWidth === currentImg.width && prevState.imgHeight === currentImg.height && (prevState.cursorPos || prevState.lastClickPos);
+  if (hasPrev) {
+    const ok = window.confirm( '前回の作業位置へ復帰しますか？\\n\\n' + '⚠ 同じ名前・同じサイズの別画像を開いた場合でも、' + 'このダイアログが表示されることがあります。' );
+    if (ok) {
+      // スケール復元
+      if (typeof prevState.scale === 'number') {
+        currentScale = prevState.scale;
+        canvas.width = currentImg.width * currentScale;
+        canvas.height = currentImg.height * currentScale;
+        canvas.style.width = canvas.width + 'px';
+        canvas.style.height = canvas.height + 'px';
+      }
+      // 位置復元（cursorPos を優先、なければ lastClickPos）
+      cursorPos = prevState.cursorPos || prevState.lastClickPos || null;
+      lastClickPos = prevState.lastClickPos || null;
+      redraw();
+      updateDebugInfo && updateDebugInfo();
+    } }
+  // ★ 最後に現在の状態を保存（今回の画像で上書き）
   saveState();
 };
   img.src = URL.createObjectURL(file);
