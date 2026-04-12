@@ -130,6 +130,7 @@ imageInput.addEventListener('change', e => {
   currentFileName = file.name;
   const img = new Image();
 
+  
 img.onload = () => {
   currentImg = img;
   lastClickPos = null;
@@ -188,12 +189,15 @@ img.onload = () => {
     } }
   // 最後に現在の状態を保存（今回の画像で上書き）
   saveState();
+  // 前回使用した画像のメッセージ表示を更新する
+  updatePrevMessageArea();
   // ★ここで毎回リセット
   imageInput.value = '';
-  
 };
   img.src = URL.createObjectURL(file);
 });
+
+
 
 // 画像とマーカーを描き直す
 function redraw() {
