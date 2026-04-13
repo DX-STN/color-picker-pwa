@@ -222,3 +222,10 @@ if (imageInput) {
     img.src = URL.createObjectURL(file);
   });
 }
+
+// PWA: Service Worker 登録
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker .register('service-worker.js') .catch(console.error);
+  });
+}
