@@ -2,17 +2,45 @@
 // 定数・要素取得
 // =======================
 const STATE_KEY = 'colorPickerState';
-const THUMB_KEY = 'colorPickerThumb'; const imageInput = document.getElementById('imageInput'); const selectedFileNameLabel = document.getElementById('selectedFileName'); const navCanvas = document.getElementById('navCanvas'); const navCtx = navCanvas.getContext('2d'); const mainCanvas = document.getElementById('canvas'); const mainCtx = mainCanvas.getContext('2d'); const zoomOutBtn = document.getElementById('zoomOut'); const zoomInBtn = document.getElementById('zoomIn'); const zoomValueSpan = document.getElementById('zoomValue'); const colorPreview = document.getElementById('colorPreview'); const hexCodeSpan = document.getElementById('hexCode'); const rgbCodeSpan = document.getElementById('rgbCode'); const debugInfo = document.getElementById('debugInfo'); const prevMessageArea = document.getElementById('prevMessageArea'); const prevOverlay = document.getElementById('prevOverlay'); const prevThumbCanvas = document.getElementById('prevThumbCanvas'); const prevFileNameDiv = document.getElementById('prevFileName');
+const THUMB_KEY = 'colorPickerThumb';
+const imageInput = document.getElementById('imageInput');
+const selectedFileNameLabel = document.getElementById('selectedFileName');
+const navCanvas = document.getElementById('navCanvas');
+const navCtx = navCanvas.getContext('2d');
+const mainCanvas = document.getElementById('canvas');
+const mainCtx = mainCanvas.getContext('2d');
+const zoomOutBtn = document.getElementById('zoomOut');
+const zoomInBtn = document.getElementById('zoomIn');
+const zoomValueSpan = document.getElementById('zoomValue');
+const colorPreview = document.getElementById('colorPreview');
+const hexCodeSpan = document.getElementById('hexCode');
+const rgbCodeSpan = document.getElementById('rgbCode');
+const debugInfo = document.getElementById('debugInfo');
+const prevMessageArea = document.getElementById('prevMessageArea');
+const prevOverlay = document.getElementById('prevOverlay');
+const prevThumbCanvas = document.getElementById('prevThumbCanvas');
+const prevFileNameDiv = document.getElementById('prevFileName');
 // =======================
 // 状態変数
 // =======================
-let currentImg = null; let currentFileName = null; let zoomLevel = 1;
+let currentImg = null;
+let currentFileName = null;
+let zoomLevel = 1;
 // 画像の表示オフセット（中心に配置するだけの簡易版）
-let offsetX = 0; let offsetY = 0;
+let offsetX = 0;
+let offsetY = 0;
 // =======================
 // ローカルストレージ
 // =======================
-function saveState() { if (!currentImg || !currentFileName) return; const state = { fileName: currentFileName, imgWidth: currentImg.width, imgHeight: currentImg.height, zoomLevel, offsetX, offsetY }; try { localStorage.setItem(STATE_KEY, JSON.stringify(state)); } catch (e) { console.error('saveState error', e); } } function loadState() { try { const json = localStorage.getItem(STATE_KEY); if (!json) return null; return JSON.parse(json); } catch (e) { console.error('loadState error', e); return null; } }
+function saveState() { if (!currentImg || !currentFileName) return;
+                      const state = { fileName: currentFileName, imgWidth: currentImg.width, imgHeight: currentImg.height, zoomLevel, offsetX, offsetY };
+                      try { localStorage.setItem(STATE_KEY, JSON.stringify(state));
+                          } catch (e) {
+                        console.error('saveState error', e);
+                      }
+                     }
+
+function loadState() { try { const json = localStorage.getItem(STATE_KEY); if (!json) return null; return JSON.parse(json); } catch (e) { console.error('loadState error', e); return null; } }
 // navCanvas のサムネイルを前回表示用に保存
 function saveThumbnail() { if (!navCanvas) return; try { const dataUrl = navCanvas.toDataURL('image/jpeg', 0.8); localStorage.setItem(THUMB_KEY, dataUrl); } catch (e) { console.error('saveThumbnail error', e); } }
 // =======================
