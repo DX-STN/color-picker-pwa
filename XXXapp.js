@@ -254,5 +254,18 @@ if (imageInput) {
       drawNavThumbnail();
       saveThumbnail();
       saveState();
-                                                                                                                                                                                                                                                                // ★この行は必ず残す：同じファイルでも毎回 change を発火させる
-                                                                                                                                                                                                                                                                imageInput.value = ''; }; img.src = URL.createObjectURL(file); }); }
+      
+      // ★この行は必ず残す：同じファイルでも毎回change を発火させる
+      imageInput.value = '';
+    };
+    img.src = URL.createObjectURL(file);
+  });
+}
+
+// PWA: Service Worker 登録
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker .register('service-worker.js') .catch(console.error);
+  });
+}
+
