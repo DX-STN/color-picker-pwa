@@ -2,3 +2,6 @@
 // =======================
 // 画像選択時の処理
 // ======================= if (imageInput) { imageInput.addEventListener('change', e => { if (!e.target.files || e.target.files.length === 0) return; const file = e.target.files[0]; if (!file) return; // ボタン横にファイル名 if (selectedFileNameLabel) { selectedFileNameLabel.textContent = file.name; } // 新しい画像を選んだら、前回表示はリセット hidePrevOverlay(); if (prevMessageArea) { prevMessageArea.textContent = ''; prevMessageArea.style.cursor = 'default'; } currentFileName = file.name; const img = new Image(); img.onload = () => { currentImg = img; zoomLevel = 1; offsetX = 0; offsetY = 0; updateZoomDisplay(); drawMainImage(); drawNavThumbnail(); saveThumbnail(); saveState(); // ★この行は必ず残す：同じファイルでも毎回 change を発火させる imageInput.value = ''; }; img.src = URL.createObjectURL(file); }); }
+
+
+// PWA: Service Worker 登録 if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker .register('service-worker.js') .catch(console.error); }); }
