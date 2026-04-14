@@ -11,7 +11,8 @@ body {margin: 0.5rem;}
 margin-top: 1rem;
 border: 1px solid #ccc;
 overflow: auto;
-max-height: 60vh;
+/*max-height: 60vh;*/
+height: 600px;
 }
 
 #canvas {
