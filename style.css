@@ -2,16 +2,16 @@ body {
 font-family: system-ui, sans-serif;
 margin: 1.5rem;
 }
-
+/*
 @media (max-width: 480px) {
 body {margin: 0.5rem;}
 }
-
+*/
 #canvasWrapper {
 margin-top: 1rem;
 border: 1px solid #ccc;
 overflow: auto;
-max-height: 80vh;
+height: 80vh;
 /*height: 600px;*/
 }
 
