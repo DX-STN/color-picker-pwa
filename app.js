@@ -82,6 +82,7 @@ function loadThumbnail() {
   img.src = dataUrl;
 }
 ctx.imageSmoothingEnabled = false;
+
 imageInput.addEventListener('change', e => {
   const file = e.target.files[0];
   if (!file) return;
@@ -130,6 +131,8 @@ imageInput.addEventListener('change', e => {
       }
     }
     saveState();
+    // change を毎回発火させるため
+    imageInput.value = '';
   };
   img.src = URL.createObjectURL(file);
 });
