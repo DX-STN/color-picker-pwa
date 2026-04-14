@@ -3,6 +3,11 @@ font-family: system-ui, sans-serif;
 margin: 1.5rem;
 }
 
+h1 {
+  font-size: 1.1rem;
+  margin: 0.25rem 0;
+}
+
 @media (max-width: 480px) {
 body {margin: 0.5rem;}
 }
