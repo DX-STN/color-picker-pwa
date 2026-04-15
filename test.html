@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>前回画像プルダウンテスト</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 16px;
+    }
+
+    #prevMessageArea {
+      min-height: 1.5em;
+      line-height: 1.5em;
+      font-size: 14px;
+      cursor: default;
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 4px;
+    }
+
+    #prevDropdown {
+      display: none;
+      margin-top: 4px;
+      position: relative;
+      z-index: 10;
+    }
+
+    #prevThumbCanvas {
+      width: 200px;
+      height: 200px;
+      border: 1px solid #000;
+      display: block;
+      background: #eee;
+    }
+
+    #prevFileName {
+      margin-top: 4px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div id="prevMessageArea"></div>
+
+  <div id="prevDropdown">
+    <canvas id="prevThumbCanvas" width="200" height="200"></canvas>
+    <div id="prevFileName"></div>
+  </div>
+
+  <p style="margin-top:16px;">↓ テスト用の画像選択</p>
+  <input type="file" id="imageInput" accept="image/*">
+
+  <script>
+    const STATE_KEY = 'prevImageState_test_v1';
+    const THUMB_KEY = 'prevImageThumb_test_v1';
+
+    const prevMessageArea = document.getElementById('prevMessageArea');
+    const prevDropdown = document.getElementById('prevDropdown');
+    const prevThumbCanvas = document.getElementById('prevThumbCanvas');
+    const prevFileNameDiv = document.getElementById('prevFileName');
+    const imageInput = document.getElementById('imageInput');
+
+    let currentImg = null;
+    let currentFileName = null;
+
+    function saveState() {
+      if (!currentImg || !currentFileName) return;
+
+      const state = { fileName: currentFileName };
+      localStorage.setItem(STATE_KEY, JSON.stringify(state));
+
+      const ctx = prevThumbCanvas.getContext('2d');
+      ctx.clearRect(0, 0, prevThumbCanvas.width, prevThumbCanvas.height);
+      ctx.drawImage(currentImg, 0, 0, prevThumbCanvas.width, prevThumbCanvas.height);
+
+      const dataUrl = prevThumbCanvas.toDataURL('image/jpeg', 0.8);
+      localStorage.setItem(THUMB_KEY, dataUrl);
+    }
+
+    function loadState() {
+      const json = localStorage.getItem(STATE_KEY);
+      if (!json) return null;
+      return JSON.parse(json);
+    }
+
+    function updatePrevMessageLine() {
+      const state = loadState();
+      if (!state || !state.fileName) {
+        prevMessageArea.textContent = '';
+        prevMessageArea.style.cursor = 'default';
+        return;
+      }
+      prevMessageArea.textContent = '> 前回使用した画像 ' + state.fileName;
+      prevMessageArea.style.cursor = 'pointer';
+    }
+
+    function fillPrevDropdown() {
+      const state = loadState();
+      if (!state || !state.fileName) return;
+
+      const dataUrl = localStorage.getItem(THUMB_KEY);
+      if (!dataUrl) return;
+
+      const ctx = prevThumbCanvas.getContext('2d');
+      const img = new Image();
+      img.onload = () => {
+        ctx.clearRect(0, 0, prevThumbCanvas.width, prevThumbCanvas.height);
+        ctx.drawImage(img, 0, 0, prevThumbCanvas.width, prevThumbCanvas.height);
+        prevFileNameDiv.textContent = state.fileName;
+      };
+      img.src = dataUrl;
+    }
+
+    function setupPrevDropdownToggle() {
+      let filledOnce = false;
+
+      prevMessageArea.addEventListener('click', () => {
+        const state = loadState();
+        if (!state || !state.fileName) return;
+
+        if (prevDropdown.style.display === 'block') {
+          prevDropdown.style.display = 'none';
+          return;
+        }
+
+        if (!filledOnce) {
+          fillPrevDropdown();
+          filledOnce = true;
+        }
+        prevDropdown.style.display = 'block';
+      });
+    }
+
+    window.addEventListener('load', () => {
+      updatePrevMessageLine();
+      prevDropdown.style.display = 'none';
+      setupPrevDropdownToggle();
+    });
+
+imageInput.addEventListener('change', e => {
+  if (!e.target.files || e.target.files.length === 0) return;
+  const file = e.target.files[0];
+  if (!file) return;
+  prevMessageArea.textContent = '';
+  prevMessageArea.style.cursor = 'default';
+  prevDropdown.style.display = 'none';
+  currentFileName = file.name;
+  const img = new Image();
+  img.onload = () => {
+    currentImg = img; saveState();
+    imageInput.value = '';
+    updatePrevMessageLine();
+  };
+  img.src = URL.createObjectURL(file);
+});
+  </script>
+</body>
+</html>
