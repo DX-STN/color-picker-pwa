@@ -1,4 +1,4 @@
-/*カラーピッカーA*/
+/*app.jsA*/
 const imageInput = document.getElementById('imageInput');
 const canvas = document.getElementById('canvas');
 const wrapper = document.getElementById('canvasWrapper');
